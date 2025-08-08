@@ -6,6 +6,6 @@ const lendingSchema = new mongoose.Schema({
     lendDate: Date,
     dueDate: Date,
     returnDate: Date
-}, { timestamps: true });
+});
 
 export default mongoose.model("Lending", lendingSchema);
