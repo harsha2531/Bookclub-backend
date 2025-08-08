@@ -1,6 +1,6 @@
 import { Router } from "express";
 import Reader from "../models/Reader";
-import auth from "../middleware/Auth";
+import auth from "../middleware/auth";
 
 const router = Router();
 
