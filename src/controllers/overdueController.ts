@@ -33,14 +33,22 @@ export const getOverdue = async (_: Request, res: Response) => {
 };
 
 export const notifyOverdue = async (req: Request, res: Response) => {
-    const reader = await Reader.findById(req.params.readerId);
-    if (!reader) return res.status(404).json({ message: "Reader not found" });
+    try {
+        const reader = await Reader.findById(req.params.readerId);
+        if (!reader || !reader.email) {
+            return res.status(404).json({ message: "Reader not found or missing email" });
+        }
 
-    await sendEmail(
-        reader.email,
-        "Overdue Books Notification",
-        "You have overdue books. Please return them as soon as possible."
-    );
+        await sendEmail(
+            reader.email,
+            "Overdue Books Notification",
+            "You have overdue books. Please return them as soon as possible."
+        );
 
-    res.json({ message: "Email sent" });
+        res.json({ message: "Email sent" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
 };
+
