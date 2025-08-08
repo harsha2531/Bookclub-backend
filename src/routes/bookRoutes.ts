@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { getBooks, addBook, updateBook, deleteBook } from "../controllers/bookController";
+import {
+    getBooks,
+    addBook,
+    updateBook,
+    deleteBook,
+} from "../controllers/bookController";
 import auth from "../middleware/auth";
 
 const router = Router();
